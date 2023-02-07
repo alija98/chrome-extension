@@ -58,7 +58,7 @@ const App = () => {
   const sendRemoveMessage = () => {
     const message: ChromeMessage = {
       from: Sender.React,
-      message: 'delete logo',
+      message: 'change logo',
     };
 
     const queryInfo: chrome.tabs.QueryInfo = {
@@ -82,7 +82,7 @@ const App = () => {
         <p>URL:</p>
         <p>{url}</p>
         <button onClick={sendTestMessage}>SEND MESSAGE</button>
-        <button onClick={sendRemoveMessage}>Remove logo</button>
+        <button onClick={sendRemoveMessage}>Change pictures</button>
         <p>Response from content:</p>
         <p>{responseFromContent}</p>
       </header>
