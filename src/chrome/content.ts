@@ -27,7 +27,10 @@ const messagesFromReactAppListener = (
   ) {
     const allImgs = document.getElementsByTagName('img');
     for (let i = 0; i < allImgs.length; i++) {
-      allImgs[i].src = message.message.link;
+      allImgs[i].src =
+        message.message.link && message.message.link.length > 0
+          ? message.message.link
+          : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png';
       allImgs[i].style.objectFit = 'contain';
     }
   }
