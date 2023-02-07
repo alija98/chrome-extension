@@ -23,16 +23,12 @@ const messagesFromReactAppListener = (
   if (
     sender.id === chrome.runtime.id &&
     message.from === Sender.React &&
-    message.message === 'change logo'
+    message.message.command === 'change logo'
   ) {
-    const reactLogo = document.createElement('img');
-    reactLogo.src =
-      'https://pbs.twimg.com/card_img/1619070653268918273/qlzz5jtB?format=png&name=medium';
-
     const allImgs = document.getElementsByTagName('img');
     for (let i = 0; i < allImgs.length; i++) {
-      allImgs[i].src =
-        'https://pbs.twimg.com/card_img/1619070653268918273/qlzz5jtB?format=png&name=medium';
+      allImgs[i].src = message.message.link;
+      allImgs[i].style.objectFit = 'contain';
     }
   }
 };

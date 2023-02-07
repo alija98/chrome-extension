@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createRef } from 'react';
 import logo from './logo.svg';
 import { ChromeMessage, Sender } from './chrome/types';
 
@@ -7,6 +7,7 @@ import './App.css';
 const App = () => {
   const [url, setUrl] = useState<string | undefined>('');
   const [responseFromContent, setResponseFromContent] = useState<string>('');
+  const inputRef = createRef<HTMLInputElement>();
 
   /**
    * Get current URL
@@ -55,10 +56,10 @@ const App = () => {
       });
   };
 
-  const sendRemoveMessage = () => {
+  const sendChangeImagesMessage = () => {
     const message: ChromeMessage = {
       from: Sender.React,
-      message: 'change logo',
+      message: { command: 'change logo', link: inputRef.current?.value },
     };
 
     const queryInfo: chrome.tabs.QueryInfo = {
@@ -79,10 +80,10 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>URL:</p>
-        <p>{url}</p>
+        <p>Enter valid img link:</p>
+        <input ref={inputRef} value={inputRef.current?.value}></input>
         <button onClick={sendTestMessage}>SEND MESSAGE</button>
-        <button onClick={sendRemoveMessage}>Change pictures</button>
+        <button onClick={sendChangeImagesMessage}>Change images</button>
         <p>Response from content:</p>
         <p>{responseFromContent}</p>
       </header>
